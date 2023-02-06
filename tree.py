@@ -4,13 +4,10 @@ A module, tree.py
 Classes
 -------
 Node(Hashable)
-
 HeadNode(Node)
-
 '''
 
 from hashable import Hashable
-from transaction import Transaction
 
 
 class Node(Hashable):
@@ -19,11 +16,17 @@ class Node(Hashable):
 
     Attributes
     ----------
+    transaction : Transaction
+        the Transaction object stored on this node
+    left_node : Node
+        the node stored to the left on this binary tree
 
     Methods
     -------
     generate_metadata
+        generates the metadata dict of the node
     append_transactions
+        extracts the transactions from the node as a list
     '''
 
     def __init__(self, transaction, left_node = None, right_node = None) -> None:
@@ -34,7 +37,7 @@ class Node(Hashable):
 
     def generate_metadata(self) -> dict:
         '''
-        A method, generate_data
+        generates the metadata dict of the node
         '''
         metadata = super().generate_metadata()
         metadata["transaction_hash"] = self.transaction.generate_hash_hex()
@@ -45,9 +48,9 @@ class Node(Hashable):
 
         return metadata
 
-    def append_transactions(self, result_list):
+    def append_transactions(self, result_list) -> None:
         '''
-        A method, get_transactions
+        extracts the transaction list from the node recursively
         '''
         if self.left_node:
             self.left_node.append_transactions(result_list)
@@ -64,13 +67,12 @@ class HeadNode(Node):
     '''
     A class, HeadNode extends Node
 
-    Attribute
-    ---------
-
     Methods
     -------
     transaction_tree_insert
+        adds the transaction list to a head node
     get_transaction_list
+        extracts the transactions from the head node as a list
     '''
 
     def __init__(self, list_of_transactions) -> None:

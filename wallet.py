@@ -4,6 +4,10 @@ A module, wallet.py
 Classes
 -------
 Wallet(Hashable)
+
+Functions
+---------
+validate_signature
 '''
 
 # from base64 import b64encode
@@ -19,9 +23,12 @@ class Wallet(Hashable):
 
     Attributes
     ----------
+    private_key : RsaKey
 
     Methods
     -------
+    generate_metadata
+    sign_transaction
     '''
 
     def __init__(self, private_key=None) -> None:
@@ -35,7 +42,7 @@ class Wallet(Hashable):
 
     def generate_metadata(self) -> dict:
         '''
-        A method, generate_metadata
+        generates the metadata dict of the wallet object
         '''
         metadata = super().generate_metadata()
         metadata["public_key"] = self.private_key.public_key().export_key().decode("utf-8")
@@ -46,16 +53,16 @@ class Wallet(Hashable):
 
     def sign_transaction(self, transaction) -> str:
         '''
-        A method, sign_transaction
+        sign a transaction with the private key in the wallet
 
         TODO: SignError or similar.
         '''
         data_to_sign = transaction.generate_hash()
         return pkcs1_15.new(self.private_key).sign(data_to_sign).hex()
 
-def validate_signature(public_key_str, signature_str, transaction) -> bool:
+def validate_signature(public_key_str : str, signature_str : str, transaction) -> bool:
     '''
-    A function, validate_signature
+    validates a signature of a transaction using a public key
     '''
     signature = bytes.fromhex(signature_str)
     public_key = RSA.import_key(public_key_str)

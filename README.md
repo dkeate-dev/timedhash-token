@@ -32,8 +32,7 @@ I have no idea what I'm doing.
     * &#x2611; Validate signatures
 * &#x2610; Create tree.py module
     * &#x2611; Create Node(Hashable) class
-    * &#x2610; Create HeadNode(Node) class
-    * &#x2610; Improve Tree functionality
+    * &#x2611; Create HeadNode(Node) class
 * &#x2610; Create additional Transaction types
     * &#x2610; NewWallet
     * &#x2610; Transfer
