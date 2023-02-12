@@ -2,12 +2,12 @@
 A module, transaction.py
 '''
 
-from hashable import Hashable
+from signable import Signable
 
 
-class Transaction(Hashable):
+class Transaction(Signable):
     '''
-    A class, Transaction extends Hashable
+    A class, Transaction extends Signable
 
     Attributes
     ----------
@@ -18,8 +18,6 @@ class Transaction(Hashable):
 
     def __init__(self) -> None:
         super().__init__()
-        #signer             Wallet?
-        #description        str
 
     def generate_metadata(self) -> dict:
         '''
