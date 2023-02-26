@@ -13,7 +13,7 @@ from signable import Signable
 from wallet import Wallet
 
 
-class Transaction(Signable):
+class TokenTransaction(Signable):
     '''
     A class, Transaction extends Signable
 
@@ -44,7 +44,7 @@ class Transaction(Signable):
         return metadata
 
 
-class TransactionOutput(Hashable):
+class TokenTransactionOutput(Hashable):
     '''
     A class, TransactionOutput extends Hashable
 
@@ -67,7 +67,7 @@ class TransactionOutput(Hashable):
         return metadata
 
 
-class TransactionInput(Hashable):
+class TokenTransactionInput(Hashable):
     '''
     A class, TransactionInput extends Hashable
 
