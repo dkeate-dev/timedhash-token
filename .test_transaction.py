@@ -5,7 +5,7 @@ from wallet import Wallet
 def main():
     my_wallet = Wallet()
     my_transaction = TokenTransaction(
-        [TokenTransactionInput(1, "abc", 2)],
+        [TokenTransactionInput((1,0), "abc", 2)],
         [
             TokenTransactionOutput("bcd", 1),
             TokenTransactionOutput("abc", 1)

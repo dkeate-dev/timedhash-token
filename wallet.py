@@ -24,7 +24,7 @@ class Wallet(Hashable):
 
     Attributes
     ----------
-    private_key : RsaKey
+    private_key : RSA.RsaKey
 
     Methods
     -------

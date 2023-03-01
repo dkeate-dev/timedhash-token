@@ -78,15 +78,15 @@ class TokenTransactionInput(Hashable):
     -------
     '''
 
-    def __init__(self, output_index, wallet_address, amount) -> None:
+    def __init__(self, reference_output : (int,int), wallet_address, amount) -> None:
         super().__init__()
-        self.output_index = output_index
+        self.reference_output = reference_output
         self.wallet_address = wallet_address
         self.amount = amount
 
     def generate_metadata(self) -> dict:
         metadata = super().generate_metadata()
-        metadata["output_index"] = self.output_index
+        metadata["reference_output"] = self.reference_output
         metadata["wallet_address"] = self.wallet_address
         metadata["amount"] = self.amount
         return metadata
