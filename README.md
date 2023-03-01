@@ -16,28 +16,11 @@ I have no idea what I'm doing.
 
 # Roadmap
 
-## Basic Implementation
+## Immediate Priorities
 
-* &#x2611; Create hashable.py module
-    * &#x2611; Hashes files and strings using SHA256
-    * &#x2611; Create Hashable class
-* &#x2610; Create block.py module
-    * &#x2611; Create Block class
-    * &#x2610; Add Transactions to Block
-* &#x2611; Create wallet.py module
-    * &#x2611; Create Wallet(Signable) class
-* &#x2611; Create tree.py module
-    * &#x2611; Create Node(Hashable) class
-    * &#x2611; Create HeadNode(Node) class
-* &#x2611; Create signable.py module
-    * &#x2611; Create Signable(Hashable) class
-* &#x2610; Create transaction.py module
-    * &#x2610; Create Transaction(Signable) class
-    * &#x2610; Implement double entry bookeeping
-    * &#x2610; Create additional Transaction types
-        * &#x2610; NewWallet
-        * &#x2610; Transfer
-        * &#x2610; Signature
+* Verification
+    * Blockchain Integrity
+    * Transaction Bookeeping
 
 ## Long Term Ideas
 
@@ -51,6 +34,9 @@ I have no idea what I'm doing.
     * base58
     * SHA256
     * RSA
+* Front End
+    * Web
+    * Software
 
 # License
 
