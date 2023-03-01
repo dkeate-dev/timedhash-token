@@ -15,6 +15,7 @@ hex_to_base58
 get_time_stamp
 '''
 
+import json
 from datetime import datetime
 
 from Crypto.Hash import SHA256
@@ -47,7 +48,7 @@ class Hashable:
         self.timestamp = get_time_stamp()
 
     def __str__(self) -> str:
-        return str(self.generate_metadata())
+        return str(json.dumps(self.generate_metadata()))
 
     def generate_metadata(self) -> dict:
         '''

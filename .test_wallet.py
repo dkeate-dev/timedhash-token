@@ -1,5 +1,8 @@
+from Crypto.PublicKey import RSA
+
 from signable import Signable
 from wallet import Wallet, validate_signature
+
 
 if __name__ == "__main__":
     my_wallet = Wallet()
@@ -21,3 +24,19 @@ if __name__ == "__main__":
     print(my_signable2.validate_signature(public_key))
 
     print(my_signable2)
+
+    w1 = Wallet()
+
+    print(w1.private_key.export_key())
+    print(w1)
+
+    with open("secrets/gw_pk.txt", "wb") as file:
+        file.write(w1.private_key.export_key())
+
+    with open("secrets/gw.json", "w") as file:
+        file.write(str(w1))
+
+    with open("secrets/gw_pk.txt", "rb") as file:
+        new_pk = RSA.import_key(file.read())
+
+    print(new_pk.export_key())

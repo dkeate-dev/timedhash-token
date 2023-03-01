@@ -1,12 +1,13 @@
 # Project-specific ignores
 
 test-files/
+secrets/
 
 
 
 # VisualStudioCode.gitignore
 
-.vscode/*
+.vscode/
 # !.vscode/settings.json
 # !.vscode/tasks.json
 # !.vscode/launch.json

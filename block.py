@@ -7,6 +7,8 @@ Block(Hashable)
 '''
 
 from hashable import Hashable
+from transaction import TokenTransaction
+from tree import HeadNode
 
 
 class Block(Hashable):
@@ -31,13 +33,10 @@ class Block(Hashable):
         generates the metadata dict of the block
     '''
 
-    def __init__(self, previous_block) -> None:
+    def __init__(self, previous_block : "Block", transactions : [TokenTransaction]) -> None:
         super().__init__()
-        #transactions_list      [Transactions]
+        self.transaction_tree = HeadNode(transactions)
 
-        #transaction_tree_head  TransactionTreeNode and create_tree_from_list
-
-        #if this is the first block, set the previous_block_hash to 0
         if previous_block:
             self.previous_block_hash_str = previous_block.generate_hash_hex()
             self.block_id = previous_block.block_id + 1
@@ -52,5 +51,8 @@ class Block(Hashable):
         metadata = super().generate_metadata()
         metadata["block_id"] = self.block_id
         metadata["previous_block_hash_str"] = self.previous_block_hash_str
+        metadata["transactions"] = [
+            i.generate_metadata() for i in self.transaction_tree.get_transaction_list()
+        ]
 
         return metadata
