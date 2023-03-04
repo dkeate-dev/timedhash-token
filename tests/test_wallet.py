@@ -4,7 +4,7 @@ from signable import Signable
 from wallet import Wallet, validate_signature
 
 
-if __name__ == "__main__":
+def test_wallet():
     my_wallet = Wallet()
     print(my_wallet)
 

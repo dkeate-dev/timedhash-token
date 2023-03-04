@@ -1,9 +1,6 @@
 from genesis import Genesis
 
 
-def main():
+def test_genesis():
     genesis_block = Genesis()
     print(genesis_block)
-
-if __name__ == "__main__":
-    main()

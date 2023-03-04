@@ -2,7 +2,8 @@ from block import Block
 from transaction import TokenTransaction, TokenTransactionInput, TokenTransactionOutput
 from wallet import Wallet
 
-if __name__ == "__main__":
+
+def test_block():
     my_wallet = Wallet()
     my_transaction = TokenTransaction(
         [TokenTransactionInput((1,0), "abc", 2)],
