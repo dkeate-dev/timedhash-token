@@ -20,16 +20,19 @@ from signable import Signable
 
 class Wallet(Hashable):
     '''
-    A class, Wallet extends Hashable
+    A class, Wallet extends Hashable, contains address and signing data
 
     Attributes
     ----------
     private_key : RSA.RsaKey
+        the private key used for signing Signables
+    wallet_address : str
+        base58 wallet address for the Wallet object
 
     Methods
     -------
-    generate_metadata
     sign_signable
+        sign a transaction with the private key in the Wallet
     '''
 
     def __init__(self, private_key : RSA.RsaKey = None) -> None:
@@ -43,9 +46,6 @@ class Wallet(Hashable):
         )
 
     def generate_metadata(self) -> dict:
-        '''
-        generates the metadata dict of the wallet object
-        '''
         metadata = super().generate_metadata()
         metadata["public_key"] = self.private_key.public_key().export_key().decode("utf-8")
         metadata["wallet_address"] = self.wallet_address
@@ -53,11 +53,9 @@ class Wallet(Hashable):
         return metadata
 
 
-    def sign_signable(self, signable) -> str:
+    def sign_signable(self, signable : "Signable") -> str:
         '''
-        sign a transaction with the private key in the wallet
-
-        TODO: SignError or similar.
+        sign a transaction with the private key in the Wallet
         '''
         data_to_sign = signable.generate_unsigned_hash()
         return pkcs1_15.new(self.private_key).sign(data_to_sign).hex()

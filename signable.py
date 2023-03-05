@@ -1,5 +1,9 @@
 '''
 A module, signable.py
+
+Classes
+-------
+Signable(Hashable)
 '''
 
 from Crypto.Hash import SHA256
@@ -11,13 +15,23 @@ from hashable import Hashable, str_hash
 
 class Signable(Hashable):
     '''
-    A class, Signable
+    A class, Signable extends Hashable, serves as the base for all Signable objects on the chain
 
     Attributes
     ----------
+    signer : str
+        base58 string representing the signer of the Signable object
+    signature : str
+        string that represents the signature of the Signable object
 
     Methods
     -------
+    generate_unsigned
+        generates the unsigned data of the Signable object
+    generate_unsigned_hash
+        generates the unsigned hash of the Signable object
+    validate_signature
+        validates the signature data of the Signable object against a RSA PublicKey object
     '''
     def __init__(
         self,
@@ -47,7 +61,7 @@ class Signable(Hashable):
 
     def generate_unsigned(self) -> dict:
         '''
-        A method, generate_unsigned_data
+        generates the unsigned data of the Signable object
         '''
         unsigned_data = self.generate_metadata()
         unsigned_data.pop("signer")
@@ -56,13 +70,13 @@ class Signable(Hashable):
 
     def generate_unsigned_hash(self) -> SHA256:
         '''
-        A method, generate_unsigned_hash
+        generates the unsigned hash of the Signable object
         '''
         return SHA256.new(str(self.generate_unsigned()).encode("utf-8"))
 
     def validate_signature(self, public_key : RSA.RsaKey) -> int:
         '''
-        A method, validate_signature
+        validates the signature data of the Signable object against a RSA PublicKey object
         '''
         signature = bytes.fromhex(self.signature)
         public_key = RSA.import_key(public_key)

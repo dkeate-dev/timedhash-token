@@ -24,23 +24,23 @@ import base58
 
 class Hashable:
     '''
-    A class, Hashable
+    A class, Hashable, creates the base of all objects on the chain
 
     Attributes
     ----------
     version : int
-        the specification version the Hashable object was created under
+        the specification version the Hashable object was created using
     timestamp : str
-        time when the Hashable object was created (according to who?)
+        time when the Hashable object was created
 
     Methods
     -------
     generate_metadata
-        generates the metadata dict of the hashable object
+        generates the metadata dict of the Hashable object
     generate_hash
         generates a SHA256 Crypto.Hash object based on the metadata
     generate_hash_hex
-        generates the sha256 hash of the object based on the metadata
+        generates the SHA256 hash of the object based on the metadata
     '''
 
     def __init__(self) -> None:
@@ -52,7 +52,7 @@ class Hashable:
 
     def generate_metadata(self) -> dict:
         '''
-        generates the metadata dict of the hashable object
+        generates the metadata dict of the Hashable object
         '''
         return {
             "version": self.version,
@@ -61,15 +61,13 @@ class Hashable:
 
     def generate_hash(self) -> SHA256:
         '''
-        generates a SHA256 Crypto.Hash object of the Hashable object using the
-        metadata of the object
+        generates a SHA256 Crypto.Hash object based on the metadata
         '''
         return SHA256.new(str(self).encode("utf-8"))
 
     def generate_hash_hex(self) -> str:
         '''
-        generates the sha256 hash string of the Hashable object using the
-        metadata of the object
+        generates the SHA256 hash of the object based on the metadata
         '''
         return str_hash_hex(str(self))
 
@@ -115,8 +113,5 @@ def hex_to_base58 (hex_str : str) -> str:
 def get_time_stamp() -> str:
     '''
     returns a simple datetime time stamp for the current UTC system time
-
-    TODO: Call ntplib and set an offset. Make it better. Maybe it's own class
-    TODO: Time consensus. HAHAHAhaha...ha..ha
     '''
     return str(datetime.utcnow())

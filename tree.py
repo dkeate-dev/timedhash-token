@@ -12,21 +12,21 @@ from hashable import Hashable
 
 class Node(Hashable):
     '''
-    A class, Node extends Hashable
+    A class, Node extends Hashable, contains a single transaction on a single Node in a tree
 
     Attributes
     ----------
     transaction : Transaction
-        the Transaction object stored on this node
+        the Transaction being stored on this Node
     left_node : Node
-        the node stored to the left on this binary tree
+        Node downstream and to the left on the tree
+    right_node : Node
+        Node downstream and to the right on the tree
 
     Methods
     -------
-    generate_metadata
-        generates the metadata dict of the node
     append_transactions
-        extracts the transactions from the node as a list
+        extracts the transaction from the Node and appends it to the passed list
     '''
 
     def __init__(self, transaction, left_node = None, right_node = None) -> None:
@@ -36,9 +36,6 @@ class Node(Hashable):
         self.right_node = right_node
 
     def generate_metadata(self) -> dict:
-        '''
-        generates the metadata dict of the node
-        '''
         metadata = super().generate_metadata()
         metadata["transaction_hash"] = self.transaction.generate_hash_hex()
         if self.left_node:
@@ -50,7 +47,7 @@ class Node(Hashable):
 
     def append_transactions(self, result_list) -> None:
         '''
-        extracts the transaction list from the node recursively
+        extracts the transaction from the Node and appends it to the passed list
         '''
         if self.left_node:
             self.left_node.append_transactions(result_list)
@@ -60,19 +57,17 @@ class Node(Hashable):
         if self.right_node:
             self.right_node.append_transactions(result_list)
 
-        return
-
 
 class HeadNode(Node):
     '''
-    A class, HeadNode extends Node
+    A class, HeadNode extends Node, is the top middle Node in the transaction tree
 
     Methods
     -------
     transaction_tree_insert
-        adds the transaction list to a head node
+        adds the transaction list to the HeadNode and cascades it down the tree
     get_transaction_list
-        extracts the transactions from the head node as a list
+        extracts the transactions from the HeadNode as a list
     '''
 
     def __init__(self, list_of_transactions) -> None:
@@ -88,7 +83,7 @@ class HeadNode(Node):
 
     def transaction_tree_insert(self, remaining_transactions) -> Node:
         '''
-        A method, transaction_tree_insert
+        adds the transaction list to the HeadNode and cascades it down the tree
         '''
         if not remaining_transactions:
             return None
@@ -103,7 +98,7 @@ class HeadNode(Node):
 
     def get_transaction_list(self):
         '''
-        A method, get_transaction_list
+        extracts the transactions from the HeadNode as a list
         '''
         result = []
 

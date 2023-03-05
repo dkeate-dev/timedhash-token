@@ -15,13 +15,18 @@ from wallet import Wallet
 
 class TokenTransaction(Signable):
     '''
-    A class, Transaction extends Signable
+    A class, TokenTransaction extends Signable, holds a set of transaction inputs and outputs
 
     Attributes
     ----------
+    transaction_inputs : [TransactionInput]
+        contains the list of TransactionInputs for the TokenTransaction
+    transaction_outputs : [TransactionOutput]
+        contains the list of TransactionOutputs for the TokenTransaction
 
     Methods
     -------
+    None
     '''
 
     def __init__(
@@ -46,13 +51,18 @@ class TokenTransaction(Signable):
 
 class TokenTransactionOutput(Hashable):
     '''
-    A class, TransactionOutput extends Hashable
+    A class, TransactionOutput extends Hashable, represents an output from a TokenTransaction
 
     Attributes
     ----------
+    wallet_address : str
+        destination wallet address for the token amount
+    amount : int
+        token amount ouptput to destination wallet address
 
     Methods
     -------
+    None
     '''
 
     def __init__(self, wallet_address : str, amount : int) -> None:
@@ -69,16 +79,24 @@ class TokenTransactionOutput(Hashable):
 
 class TokenTransactionInput(Hashable):
     '''
-    A class, TransactionInput extends Hashable
+    A class, TransactionInput extends Hashable, represents an input into a TokenTransaction
 
     Attributes
     ----------
+    reference_output : (int,int)
+        the reference transaction (block_id, transaction output index) for the current
+        TokenTransactionInput
+    wallet_address : str
+        origination wallet for the token amount
+    amount : int
+        token amount input from the origination wallet address
 
     Methods
     -------
+    None
     '''
 
-    def __init__(self, reference_output : (int,int), wallet_address, amount) -> None:
+    def __init__(self, reference_output : (int,int), wallet_address : str, amount : int) -> None:
         super().__init__()
         self.reference_output = reference_output
         self.wallet_address = wallet_address

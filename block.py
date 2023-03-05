@@ -13,24 +13,22 @@ from tree import HeadNode
 
 class Block(Hashable):
     '''
-    A class, Block, is used to represent a block of transactions stored to the
+    A class, Block extends Hashable, is used to represent a block of information stored to the
     chain
 
     Attributes
     ----------
-    version : int
-        an integer that represents the version the block was created under
     block_id : int
-        sequential id for the current block.starting with 0
-    timestamp : str
-        current date and time in format yyyy-mm-dd hh:mm:ss.ssssss
+        sequential id for the current Block starting with 0
     previous_block_hash_str : str
         hash of previous_block if there is one, else a string of 64 0s
+    transactions : [TokenTransaction]
+        list of transactions to be stored in the Block
 
     Methods
     -------
     generate_metadata
-        generates the metadata dict of the block
+        generates the metadata dict of the Block
     '''
 
     def __init__(self, previous_block : "Block", transactions : [TokenTransaction]) -> None:
@@ -46,7 +44,7 @@ class Block(Hashable):
 
     def generate_metadata(self) -> dict:
         '''
-        generates the metadata dict of the block
+        generates the metadata dict of the Block
         '''
         metadata = super().generate_metadata()
         metadata["block_id"] = self.block_id
